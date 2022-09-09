@@ -1,4 +1,4 @@
-import {Button, Text, View} from 'react-native';
+import {Button, Image, View} from 'react-native';
 import {setIsLoggedIn} from '../../login/login-reducer';
 import {useDispatch} from 'react-redux';
 
@@ -12,7 +12,10 @@ export const HomeScreen = () => {
 
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Home!</Text>
+            <Image
+                style={{width: 100, height: 100}}
+                source={require('../../common/icons/home/home.png')}
+            />
             <Button
                 onPress={onLogOutButtonPress}
                 title="Log out"

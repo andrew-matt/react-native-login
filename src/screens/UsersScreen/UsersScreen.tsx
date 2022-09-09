@@ -1,16 +1,22 @@
-import {FlatList, Image, ListRenderItem, StyleSheet, View, Text} from 'react-native';
+import {FlatList, Image, ListRenderItem, StyleSheet, View, Text, Dimensions} from 'react-native';
 import {usersArr, UserType} from '../../data/data';
+
+const {width} = Dimensions.get('screen');
 
 export const UsersScreen = () => {
 
     const render: ListRenderItem<UserType> = ({item}) => {
         return (
-            <View>
+            <View style={styles.item}>
                 <Image
-                    style={{width: 100, height: 100, borderRadius: 50}}
+                    style={styles.image}
                     source={item.image}
                 />
-                <Text>{item.name}</Text>
+                <View style={styles.info}>
+                    <Text>{item.name},</Text>
+                    <Text>{item.age} years old,</Text>
+                    <Text>{item.city}</Text>
+                </View>
             </View>
         );
     };
@@ -21,6 +27,7 @@ export const UsersScreen = () => {
                 data={usersArr}
                 renderItem={render}
                 numColumns={2}
+                columnWrapperStyle={{justifyContent: 'space-between'}}
                 keyExtractor={item => item.id}
             />
         </View>
@@ -30,5 +37,22 @@ export const UsersScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 20,
+        paddingHorizontal: 5,
+    },
+    item: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: width / 2 - 15,
+        marginHorizontal: 5,
+        marginVertical: 10,
+    },
+    image: {
+        width: 80,
+        height: 80,
+        borderRadius: 50,
+    },
+    info: {
+        padding: 5,
     },
 });
